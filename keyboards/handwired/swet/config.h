@@ -91,7 +91,7 @@
  */
 
 
-#define TAPPING_TERM 200
+#define TAPPING_TERM 150
 /* If defined, GRAVE_ESC will always act as ESC when CTRL is held.
  * This is userful for the Windows task manager shortcut (ctrl+shift+esc).
  */
