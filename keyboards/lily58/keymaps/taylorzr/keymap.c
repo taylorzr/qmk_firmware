@@ -9,27 +9,27 @@ enum my_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT( \
-    KC_GRV,         KC_1,   KC_2,   KC_3,    KC_4,    KC_5,            /*___*/            /*******/ /*___*/            KC_6,           KC_7,    KC_8,    KC_9,   KC_0,    KC_BSLASH,         \
-    LALT_T(KC_EQL), KC_Q,   KC_W,   KC_E,    KC_R,    KC_T,            /*___*/            /*******/ /*___*/            KC_Y,           KC_U,    KC_I,    KC_O,   KC_P,    LALT_T(KC_MINS),   \
-    LCTL_T(KC_TAB), KC_A,   KC_S,   KC_D,    KC_F,    KC_G,            /*___*/            /*******/ /*___*/            KC_H,           KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,           \
-    LSFT_T(KC_GRV), KC_Z,   KC_X,   KC_C,    KC_V,    KC_B,            XXXXXXX,           /*******/ XXXXXXX,           KC_N,           KC_M,    KC_COMM, KC_DOT, KC_SLSH, LSFT_T(KC_BSLASH), \
-    /*___*/         /*___*/ /*___*/ _______, _______, LGUI_T(KC_BSPC), LT(_RAISE,KC_SPC), /*******/ LT(_LOWER,KC_ENT), LSFT_T(KC_ESC), _______, _______  \
+    KC_GRV,        KC_1,   KC_2,   KC_3,    KC_4,    KC_5,          /*___*/            /*******/ /*___*/             KC_6,          KC_7,    KC_8,    KC_9,   KC_0,    KC_BSLASH,        \
+    ALT_T(KC_EQL), KC_Q,   KC_W,   KC_E,    KC_R,    KC_T,          /*___*/            /*******/ /*___*/             KC_Y,          KC_U,    KC_I,    KC_O,   KC_P,    ALT_T(KC_MINS),   \
+    CTL_T(KC_TAB), KC_A,   KC_S,   KC_D,    KC_F,    KC_G,          /*___*/            /*******/ /*___*/             KC_H,          KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,          \
+    SFT_T(KC_GRV), KC_Z,   KC_X,   KC_C,    KC_V,    KC_B,          XXXXXXX,           /*******/ XXXXXXX,            KC_N,          KC_M,    KC_COMM, KC_DOT, KC_SLSH, SFT_T(KC_BSLASH), \
+    /*___*/        /*___*/ /*___*/ _______, _______, GUI_T(KC_ESC), LT(_RAISE,KC_SPC), /*******/ LT(_LOWER,KC_BSPC), SFT_T(KC_ENT), _______, _______  \
   ),
 
   [_LOWER] = LAYOUT( \
-    _______, DF(_QWERTY), _______,    _______,       _______,       _______,    /*___*/          /*******/ /*___*/  _______,    _______,    _______,    _______,    _______,    _______, \
-    _______, KC_1,        KC_2,       KC_3,          KC_4,          KC_5,       /*___*/          /*******/ /*___*/  KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       _______, \
-    _______, LSFT(KC_1),  LSFT(KC_2), LSFT(KC_3),    LSFT(KC_4),    LSFT(KC_5), /*___*/          /*******/ /*___*/  LSFT(KC_6), LSFT(KC_7), LSFT(KC_8), LSFT(KC_9), LSFT(KC_0), _______, \
-    _______, _______,     _______,    LSFT(KC_LBRC), LSFT(KC_RBRC), _______,    XXXXXXX,         /*******/ XXXXXXX, KC_LBRC,    KC_RBRC,    _______,    _______,    _______,    _______, \
-    /*___*/  /*___*/      /*___*/     _______,       _______,       KC_BSPC,    LT(_NAV,KC_SPC), /*******/ _______, _______,    _______,    _______     \
+    _______, DF(_QWERTY), _______, _______,    _______,    _______, /*___*/          /*******/ /*___*/  _______, _______, _______, _______, _______, _______, \
+    _______, KC_1,        KC_2,    KC_3,       KC_4,       KC_5,    /*___*/          /*******/ /*___*/  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
+    _______, S(KC_1),     S(KC_2), S(KC_3),    S(KC_4),    S(KC_5), /*___*/          /*******/ /*___*/  S(KC_6), S(KC_7), S(KC_8), S(KC_9), S(KC_0), _______, \
+    _______, _______,     _______, S(KC_LBRC), S(KC_RBRC), _______, XXXXXXX,         /*******/ XXXXXXX, KC_LBRC, KC_RBRC, _______, _______, _______, _______, \
+    /*___*/  /*___*/      /*___*/  _______,    _______,    _______, LT(_NAV,KC_SPC), /*******/ _______, _______, _______, _______  \
   ),
 
   [_RAISE] = LAYOUT( \
-    _______, _______,    _______,    _______,       _______,       _______, /*___*/  /*******/ /*___*/   _______, _______, _______, _______,  _______, _______, \
-    KC_DEL,  _______,    _______,    KC_LBRC,       KC_RBRC,       KC_EQL,  /*___*/  /*******/ /*___*/   KC_MPLY, KC_VOLD, KC_VOLU, KC_MNXT,  _______, KC_DEL,  \
-    _______, _______,    _______,    LSFT(KC_9),    LSFT(KC_0),    KC_HOME, /*___*/  /*******/ /*___*/   KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______, \
-    _______, LSFT(KC_3), LSFT(KC_4), LSFT(KC_LBRC), LSFT(KC_RBRC), KC_END,  XXXXXXX, /*******/ XXXXXXX,  _______, _______, _______, _______,  _______, _______, \
-    /*___*/  /*___*/     /*___*/     _______,       _______,       _______, _______, /*******/ MO(_NAV), _______, _______, _______  \
+    _______, _______, _______, _______,    _______,    _______, /*___*/  /*******/ /*___*/           _______, _______, _______, _______,  _______, _______, \
+    KC_DEL,  _______, _______, KC_LBRC,    KC_RBRC,    KC_EQL,  /*___*/  /*******/ /*___*/           KC_MPLY, KC_VOLD, KC_VOLU, KC_MNXT,  _______, KC_DEL,  \
+    _______, _______, _______, S(KC_9),    S(KC_0),    KC_HOME, /*___*/  /*******/ /*___*/           KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______, \
+    _______, S(KC_3), S(KC_4), S(KC_LBRC), S(KC_RBRC), KC_END,  XXXXXXX, /*******/ XXXXXXX,          _______, _______, _______, _______,  _______, _______, \
+    /*___*/  /*___*/  /*___*/  _______,    _______,    _______, _______, /*******/ LT(_NAV,KC_BSPC), _______, _______, _______  \
   ),
 
 
