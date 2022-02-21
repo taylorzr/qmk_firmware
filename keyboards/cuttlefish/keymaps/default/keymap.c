@@ -26,8 +26,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_Q,   KC_W,        KC_E,   KC_R,           KC_T,           /*******/ KC_Y,           KC_U,         KC_I,    KC_O,   KC_P,           XXXXXXX, \
     XXXXXXX, KC_A,   CTL_T(KC_S), KC_D,   KC_F,           KC_G,           /*******/ KC_H,           KC_J,         KC_K,    KC_L,   TD(SEMI_EQL),   XXXXXXX, \
     XXXXXXX, KC_Z,   KC_X,        KC_C,   KC_V,           KC_B,           /*******/ KC_N,           KC_M,         KC_COMM, KC_DOT, ALT_T(KC_SLSH), XXXXXXX, \
-    /*___*/  /*___*/ /*___*/      /*___*/ GUI_T(KC_QUOT), LT(_L2,KC_SPC), /*******/ LT(_L1,KC_ENT), SFT_T(KC_ESC) \
+    /*___*/  /*___*/ /*___*/      /*___*/ GUI_T(KC_MINS), LT(_L2,KC_SPC), /*******/ LT(_L1,KC_ENT), SFT_T(KC_ESC) \
   ),
+
   // try modtap && tapdance together:
   // https://docs.qmk.fm/#/feature_tap_dance?id=example-4
 
@@ -39,26 +40,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_L1] = LAYOUT( \
-    _______, KC_1,      KC_2,    KC_3,       KC_4,       KC_5,    /*******/ KC_6,      KC_7,    KC_8,    KC_9,       KC_0,    _______, \
-    _______, S(KC_1),   S(KC_2), S(KC_3),    S(KC_4),    S(KC_5), /*******/ S(KC_6),   S(KC_7), S(KC_8), S(KC_9),    S(KC_0), _______, \
-    _______, S(KC_GRV), KC_GRV,  S(KC_LBRC), S(KC_RBRC), KC_MINS, /*******/ S(KC_EQL), KC_LBRC, KC_RBRC, _______, _______,  _______, \
-    /*___*/  /*___*/    /*___*/  /*___*/     S(KC_MINS), KC_BSPC, /*******/ _______,   _______  \
+    _______, KC_1,    KC_2,      KC_3,       KC_4,       KC_5,    /*******/ KC_6,      KC_7,    KC_8,    KC_9,    KC_0,       _______, \
+    _______, S(KC_1), S(KC_2),   S(KC_3),    S(KC_4),    S(KC_5), /*******/ S(KC_6),   S(KC_7), S(KC_8), S(KC_9), S(KC_0),    _______, \
+    _______, KC_GRV,  S(KC_GRV), S(KC_LBRC), S(KC_RBRC), KC_EQL,  /*******/ S(KC_EQL), KC_LBRC, KC_RBRC, KC_QUOT, S(KC_QUOT), _______, \
+    /*___*/  /*___*/  /*___*/    /*___*/     _______,    KC_BSPC, /*******/ _______,   _______  \
   ),
 
   [_L2] = LAYOUT( \
-    _______, DF(_QWERTY), DF(_COLEMAKDH), G(KC_C),     G(KC_V),       SS_FILE,     /*******/ KC_MPLY, KC_VOLD,    KC_VOLU, KC_MNXT,  _______,      _______, \
-    _______, C(KC_LEFT),  KC_MS_BTN2,     KC_MS_BTN3,  KC_MS_BTN1,    C(KC_RIGHT), /*******/ KC_LEFT, KC_DOWN,    KC_UP,   KC_RIGHT, S(KC_BSLASH), _______, \
-    _______, KC_DEL,      _______,        KC_MS_WH_UP, KC_MS_WH_DOWN, SS_COPY,     /*******/ KC_MINS, S(KC_MINS), KC_EQL,  KC_PLUS,  KC_BSLASH,    _______, \
-    /*___*/  /*___*/      /*___*/         /*___*/      _______,       _______,     /*******/ KC_TAB,  KC_CAPS     \
+    _______, DF(_QWERTY), DF(_COLEMAKDH), G(KC_C),     G(KC_V),       SS_FILE,     /*******/ KC_MPLY, KC_VOLD, KC_VOLU, KC_MNXT,  _______,      _______, \
+    _______, C(KC_LEFT),  KC_MS_BTN2,     KC_MS_BTN3,  KC_MS_BTN1,    C(KC_RIGHT), /*******/ KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, S(KC_BSLASH), _______, \
+    _______, KC_CAPS,     KC_DEL,         KC_MS_WH_UP, KC_MS_WH_DOWN, SS_COPY,     /*******/ _______, _______, _______, _______,  KC_BSLASH,    _______, \
+     /*___*/ /*___*/      /*___*/         /*___*/      _______,       _______,     /*******/ KC_TAB,  KC_CAPS  \
   ),
 };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 	switch (keycode) {
 		case CTL_T(KC_S):
-			return 250;
+			return 200;
 		case CTL_T(KC_R):
-			return 250;
+			return 200;
 		case ALT_T(KC_SLSH):
 			return 250;
 		default:
