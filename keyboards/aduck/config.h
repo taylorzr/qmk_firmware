@@ -8,6 +8,8 @@
 #define MANUFACTURER taylorzr // change to dude who made it
 #define PRODUCT aduck
 
+#define MASTER_LEFT
+#define USE_SERIAL
 #define SOFT_SERIAL_PIN D1
 
 #define MATRIX_ROWS 8

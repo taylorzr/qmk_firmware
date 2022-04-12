@@ -6,7 +6,6 @@
 
 enum my_layers {
 	_COLEMAKDH = 0,
-	_QWERTY,
 	_GAME,
 	_SYM,
 	_FUN,
@@ -23,47 +22,40 @@ enum {
 };
 
 enum combo_events {
-  TAB_COMBO,
   DEL_COMBO,
   CAPS_COMBO,
   COPY_COMBO,
-  PASTE_COMBO,
+  TAB_COMBO,
   PLAY_COMBO,
-  COLON_EQUALS_COMBO,
+  NEXT_COMBO,
   ENT_COMBO,
   COMBO_LENGTH,
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 // dont forget to update combo count in config.h
-const uint16_t PROGMEM fp_combo[]     = {KC_F,        KC_P,    COMBO_END};
 const uint16_t PROGMEM fb_combo[]     = {KC_F,        KC_B,    COMBO_END};
-const uint16_t PROGMEM pb_combo[]     = {KC_P,        KC_B,    COMBO_END};
-const uint16_t PROGMEM ft_combo[]     = {KC_F,        KC_T,    COMBO_END};
+const uint16_t PROGMEM fp_combo[]     = {KC_F,        KC_P,    COMBO_END};
+const uint16_t PROGMEM sg_combo[]     = {GUI_T(KC_S), KC_G,    COMBO_END};
 const uint16_t PROGMEM cd_combo[]     = {KC_C,        KC_D,    COMBO_END};
 const uint16_t PROGMEM dv_combo[]     = {KC_D,        KC_V,    COMBO_END};
 const uint16_t PROGMEM lu_combo[]     = {KC_L,        KC_U,    COMBO_END};
-const uint16_t PROGMEM jl_combo[]     = {KC_J,        KC_L,    COMBO_END};
+const uint16_t PROGMEM ju_combo[]     = {KC_J,        KC_U,    COMBO_END};
+const uint16_t PROGMEM nu_combo[]     = {KC_N,        KC_U,    COMBO_END};
 const uint16_t PROGMEM hcomma_combo[] = {KC_H,        KC_COMM, COMBO_END};
 
 combo_t key_combos[] = {
-  [COPY_COMBO]         = COMBO(fp_combo,     G(KC_C)),
-  [PASTE_COMBO]        = COMBO(fb_combo,     G(KC_V)),
-  [DEL_COMBO]          = COMBO(pb_combo,     KC_DEL),
-  [CAPS_COMBO]         = COMBO_ACTION(ft_combo),
+  [DEL_COMBO]          = COMBO(fb_combo,     KC_DEL),
+  [CAPS_COMBO]         = COMBO_ACTION(fp_combo),
+  [COPY_COMBO]         = COMBO(sg_combo,     KC_COPY),
   [TAB_COMBO]          = COMBO(cd_combo,     KC_TAB),
-  [PLAY_COMBO]         = COMBO(jl_combo,     KC_MPLY),
-  [COLON_EQUALS_COMBO] = COMBO_ACTION(lu_combo),
+  [PLAY_COMBO]         = COMBO(lu_combo,     KC_MPLY),
+  [NEXT_COMBO]         = COMBO(ju_combo,     KC_MNXT),
   [ENT_COMBO]          = COMBO(hcomma_combo, KC_ENT),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch(combo_index) {
-    case COLON_EQUALS_COMBO:
-      if (pressed) {
-        SEND_STRING(":=");
-      }
-      break;
     case CAPS_COMBO:
       if (pressed) {
         caps_word_set(true);
@@ -72,44 +64,33 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   }
 }
 
-// add slep back in
-// add df layers back in
-// DF(_COLEMAKDH)
-// DF(_QWERTY)
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_COLEMAKDH] = LAYOUT( \
-			KC_Q,   KC_W,        KC_F,        KC_P,          KC_B,           /*******/ KC_J,            KC_L,            KC_U,        KC_Y,        TD(SCLN), \
-			KC_A,   ALT_T(KC_R), GUI_T(KC_S), KC_T,          KC_G,           /*******/ KC_M,            KC_N,            GUI_T(KC_E), ALT_T(KC_I), KC_O,     \
-			KC_Z,   KC_X,        KC_C,        KC_D,          KC_V,           /*******/ KC_K,            KC_H,            KC_COMM,     KC_DOT,      KC_SLSH,  \
+			KC_Q,   KC_W,        KC_F,        KC_P,          KC_B,           /*******/ KC_J,            KC_L,            KC_U,        KC_Y,        KC_QUOT,  \
+			KC_A,   ALT_T(KC_R), GUI_T(KC_S), KC_T,          KC_G,           /*******/ KC_M,            KC_N,            GUI_T(KC_E), ALT_T(KC_I), KC_O,    \
+			KC_Z,   KC_X,        KC_C,        KC_D,          KC_V,           /*******/ KC_K,            KC_H,            KC_COMM,     KC_DOT,      KC_SLSH, \
 			/*___*/ /*___*/      /*___*/      CTL_T(KC_ESC), SFT_T(KC_BSPC), /*******/ LT(_SYM,KC_SPC), LT(_FUN,KC_MINS) \
 			),
 
-	[_QWERTY] = LAYOUT( \
-			KC_Q,        KC_W,        KC_E,        KC_R,          KC_T,           /*******/ KC_Y,            KC_U,            KC_I,    KC_O,   KC_P,    \
-			ALT_T(KC_A), GUI_T(KC_S), SFT_T(KC_D), KC_F,          KC_G,           /*******/ KC_H,            KC_J,            KC_K,    KC_L,   KC_MINS, \
-			KC_Z,        KC_X,        KC_C,        KC_V,          KC_B,           /*******/ KC_N,            KC_M,            KC_COMM, KC_DOT, KC_SLSH, \
-			/*___*/      /*___*/      /*___*/      CTL_T(KC_ESC), SFT_T(KC_BSPC), /*******/ LT(_SYM,KC_SPC), LT(_FUN,KC_MINS) \
-			),
-
 	[_GAME] = LAYOUT( \
-			KC_ESC,  KC_Q,   KC_W,   KC_E,    KC_R,   /*******/ KC_Y,             KC_U,            KC_I,    KC_O,   KC_P,    \
-			KC_LSFT, KC_A,   KC_S,   KC_D,    KC_F,   /*******/ KC_H,             KC_J,            KC_K,    KC_L,   KC_MINS, \
-			KC_TAB,  KC_Z,   KC_X,   KC_C,    KC_V,   /*******/ KC_N,             KC_M,            KC_COMM, KC_DOT, KC_SLSH, \
-			/*___*/  /*___*/ /*___*/ KC_LCTL, KC_SPC, /*******/ LT(_SYM,KC_BSPC), LT(_FUN,KC_MINS) \
+			KC_TAB,  KC_Q,   KC_W,   KC_E,            KC_R,   /*******/ KC_Y,             KC_U,            KC_I,    KC_O,   KC_P,    \
+			KC_LSFT, KC_A,   KC_S,   KC_D,            KC_F,   /*******/ KC_H,             KC_J,            KC_K,    KC_L,   KC_MINS, \
+			KC_LCTL, KC_Z,   KC_X,   KC_C,            KC_V,   /*******/ KC_N,             KC_M,            KC_COMM, KC_DOT, KC_SLSH, \
+			/*___*/  /*___*/ /*___*/ LT(_SYM,KC_ESC), KC_SPC, /*******/ LT(_SYM,KC_BSPC), LT(_FUN,KC_MINS) \
 			),
 
 	[_SYM] = LAYOUT( \
-			KC_1,      KC_2,    KC_3,    KC_4,            KC_5,    /*******/ KC_6,      KC_7,       KC_8,      KC_9,      KC_0,         \
-			S(KC_1),   S(KC_2), S(KC_3), S(KC_4),         S(KC_5), /*******/ S(KC_6),   S(KC_7),    S(KC_8),   KC_EQL,    S(KC_BSLASH), \
-			S(KC_GRV), KC_GRV,  KC_QUOT, TD(DOUBLE_QUOT), _______, /*******/ S(KC_EQL), TD(PARENS), TD(CURLY), TD(BRACS), KC_BSLASH,    \
-			/*___*/    /*___*/  /*___*/  _______,         _______, /*******/ _______,   _______     \
+			KC_1,      KC_2,    KC_3,            KC_4,    KC_5,         /*******/ KC_6,      KC_7,       KC_8,      KC_9,      KC_0,       \
+			S(KC_1),   S(KC_2), S(KC_3),         S(KC_4), S(KC_5),      /*******/ S(KC_6),   S(KC_7),    S(KC_8),   KC_EQL,    S(KC_SCLN), \
+			S(KC_GRV), _______, TD(DOUBLE_QUOT), KC_QUOT, S(KC_BSLASH), /*******/ S(KC_EQL), TD(PARENS), TD(CURLY), TD(BRACS), KC_BSLASH,  \
+			/*___*/    /*___*/  /*___*/          KC_GRV,  _______,      /*******/ _______,   _______     \
 			),
 
 	[_FUN] = LAYOUT( \
+			_______, _______, C(A(KC_LEFT)), C(A(KC_RIGHT)), _______, /*******/ KC_MPLY, KC_VOLD, KC_VOLU, KC_MNXT,  TG(_GAME), \
+			KC_F11,  KC_F12,  C(S(KC_LEFT)), C(S(KC_RIGHT)), _______, /*******/ KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, SS_FILE, \
 			KC_F1,   KC_F2,   KC_F3,         KC_F4,          KC_F5,   /*******/ KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  \
-			KC_F11,  KC_F12,  C(S(KC_LEFT)), C(S(KC_RIGHT)), SS_COPY, /*******/ KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, \
-			_______, _______, C(A(KC_LEFT)), C(A(KC_RIGHT)), SS_FILE, /*******/ KC_MPLY, KC_VOLD, KC_VOLU, KC_MNXT,  _______, \
-			/*___*/  /*___*/  /*___*/        _______,        KC_ENT,  /*******/ KC_SLEP, _______  \
+			/*___*/  /*___*/  /*___*/        SS_COPY,        KC_ENT,  /*******/ KC_SLEP, _______  \
 			),
 
 };

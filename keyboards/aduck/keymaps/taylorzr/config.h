@@ -1,11 +1,8 @@
 #pragma once
 
-#define MASTER_LEFT
-
 #define DEBOUNCE 5
 #define TAPPING_TERM 150
 #define TAPPING_TERM_PER_KEY
 #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
 
-#define COMBO_COUNT 8
 #define COMBO_TERM 50
