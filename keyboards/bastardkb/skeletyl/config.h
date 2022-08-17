@@ -29,7 +29,8 @@
 #define MATRIX_ROW_PINS { B5, F7, F6, B6 }
 #define MATRIX_COL_PINS { E6, C6, B1, B3, B2 }
 
-#define DIODE_DIRECTION ROW2COL
+// #define DIODE_DIRECTION ROW2COL
+#define DIODE_DIRECTION COL2ROW
 
 #define RGB_DI_PIN D2
 #define RGBLED_NUM 36
@@ -40,7 +41,7 @@
 
 #define SOFT_SERIAL_PIN D0
 
-#define MASTER_RIGHT
+#define MASTER_LEFT
 
 // RGB matrix support
 #ifdef RGB_MATRIX_ENABLE
@@ -100,3 +101,6 @@
 #    define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #    define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
+
+
+#define COMBO_COUNT 12
