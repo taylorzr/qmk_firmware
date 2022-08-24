@@ -104,3 +104,16 @@
 
 
 #define COMBO_COUNT 12
+
+// https://docs.qmk.fm/#/tap_hold?id=permissive-hold
+#define PERMISSIVE_HOLD
+
+/*
+   The PERMISSIVE_HOLD option also affects Mod Tap keys, but this may not be noticeable if you do
+   not also enable the IGNORE_MOD_TAP_INTERRUPT option for those keys, because the default handler
+   for Mod Tap keys also considers both the “nested press” and “rolling press” sequences like shown
+   above as a modifier hold, not the tap action. If you do not enable IGNORE_MOD_TAP_INTERRUPT, the
+   effect of PERMISSIVE_HOLD on Mod Tap keys would be limited to reducing the delay before the key
+   events are made visible to the host.
+ */
+#define IGNORE_MOD_TAP_INTERRUPT

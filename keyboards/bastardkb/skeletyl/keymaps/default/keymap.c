@@ -48,97 +48,84 @@ combo_t key_combos[COMBO_COUNT] = {
 };
 
 enum custom_keycodes {
-    MYPAR = SAFE_RANGE,
-    MYBRC,
-    MYBKT,
-    MYDQT,
-    MYSQT,
+    MY_PAR = SAFE_RANGE,
+    MY_BRC,
+    MY_BKT,
+    MY_DQT,
+    MY_SQT,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-	switch (keycode) {
-		case MYPAR:
-			if (record->event.pressed) {
-				// when keycode QMKBEST is pressed
-				SEND_STRING("()" SS_TAP(X_LEFT));
-			} else {
-				// when keycode QMKBEST is released
-			}
-			break;
-		case MYBRC:
-			if (record->event.pressed) {
-				// when keycode QMKBEST is pressed
-				SEND_STRING("{}" SS_TAP(X_LEFT));
-			} else {
-				// when keycode QMKBEST is released
-			}
-			break;
-		case MYBKT:
-			if (record->event.pressed) {
-				// when keycode QMKBEST is pressed
-				SEND_STRING("[]" SS_TAP(X_LEFT));
-			} else {
-				// when keycode QMKBEST is released
-			}
-			break;
-		case MYDQT:
-			if (record->event.pressed) {
-				// when keycode QMKBEST is pressed
-				SEND_STRING("\"\"" SS_TAP(X_LEFT));
-			} else {
-				// when keycode QMKBEST is released
-			}
-			break;
-		case MYSQT:
-			if (record->event.pressed) {
-				// when keycode QMKBEST is pressed
-				SEND_STRING("''" SS_TAP(X_LEFT));
-			} else {
-				// when keycode QMKBEST is released
-			}
-			break;
-	}
-	return true;
+    switch (keycode) {
+        case MY_PAR:
+            if (record->event.pressed) {
+                // when keycode QMKBEST is pressed
+                SEND_STRING("()" SS_TAP(X_LEFT));
+            } else {
+                // when keycode QMKBEST is released
+            }
+            break;
+        case MY_BRC:
+            if (record->event.pressed) {
+                // when keycode QMKBEST is pressed
+                SEND_STRING("{}" SS_TAP(X_LEFT));
+            } else {
+                // when keycode QMKBEST is released
+            }
+            break;
+        case MY_BKT:
+            if (record->event.pressed) {
+                // when keycode QMKBEST is pressed
+                SEND_STRING("[]" SS_TAP(X_LEFT));
+            } else {
+                // when keycode QMKBEST is released
+            }
+            break;
+        case MY_DQT:
+            if (record->event.pressed) {
+                // when keycode QMKBEST is pressed
+                SEND_STRING("\"\"" SS_TAP(X_LEFT));
+            } else {
+                // when keycode QMKBEST is released
+            }
+            break;
+        case MY_SQT:
+            if (record->event.pressed) {
+                // when keycode QMKBEST is pressed
+                SEND_STRING("''" SS_TAP(X_LEFT));
+            } else {
+                // when keycode QMKBEST is released
+            }
+            break;
+    }
+    return true;
 };
 
+// Testing changes
+// - swap single/double quote
+// - pane switching below arrows (F keys removed)
+// - window resizing below desktop swapping
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
-	// TODO: Better use of right side 3rd thumb key?
+  // TODO: Better use of right side 3rd thumb key?
   [0] = LAYOUT_split_3x5_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y,   KC_QUOTE,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I, KC_O,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, 
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          CTL_T(KC_ESC), SFT_T(KC_BSPC),  GUI_T(KC_DEL),     ALT_T(KC_SCLN), LT(1,KC_SPC) , LT(2,KC_MINS)
-                                      //`--------------------------'  `--------------------------'
-
-  ),
+      KC_Q, KC_W, KC_F,          KC_P,           KC_B,          KC_J,           KC_L,         KC_U,    KC_Y,   KC_QUOTE,
+      KC_A, KC_R, KC_S,          KC_T,           KC_G,          KC_M,           KC_N,         KC_E,    KC_I,   KC_O,
+      KC_Z, KC_X, KC_C,          KC_D,           KC_V,          KC_K,           KC_H,         KC_COMM, KC_DOT, KC_SLSH,
+      /***/ /***/ CTL_T(KC_ESC), SFT_T(KC_BSPC), GUI_T(KC_DEL), ALT_T(KC_SCLN), LT(1,KC_SPC), LT(2,KC_MINS)
+      ),
 
   [1] = LAYOUT_split_3x5_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR,   KC_ASTR, KC_EQL, KC_COLN,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_TILDE, KC_SCLN, MYDQT, MYSQT, KC_PIPE,                      KC_PLUS, MYPAR, MYBRC, MYBKT, KC_BSLS,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_GRV, _______,  _______,     _______, _______, _______
-                                      //`--------------------------'  `--------------------------'
-  ),
+      KC_1,     KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,   KC_0,
+      KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL, KC_COLN,
+      KC_TILDE, KC_SCLN, MY_SQT,  MY_DQT,  KC_PIPE, KC_PLUS, MY_PAR,  MY_BRC,  MY_BKT, KC_BSLS,
+      /***/     /***/    KC_GRV,  _______, _______, _______, _______, _______
+      ),
   
-
   [2] = LAYOUT_split_3x5_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______,   _______, _______,  _______, _______,                      _______, KC_VOLD, KC_VOLU, _______, _______,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_F11, KC_F12, LCTL(LSFT(KC_LEFT)), LCTL(LSFT(KC_RIGHT)), XXXXXXX,                      KC_LEFT,  KC_DOWN, KC_UP, KC_RIGHT, _______,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                      KC_F6, KC_F7, KC_F8, KC_F9, KC_F10,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______,  _______,     _______, _______, _______
-                                      //`--------------------------'  `--------------------------'
-  ),
+      _______, _______, _______,             _______,              _______, _______,       KC_VOLD,       KC_VOLU,     _______,        _______,
+      _______, _______, LCTL(LSFT(KC_LEFT)), LCTL(LSFT(KC_RIGHT)), _______, KC_LEFT,       KC_DOWN,       KC_UP,       KC_RIGHT,       _______,
+      _______, _______, LCTL(LALT(KC_LEFT)), LCTL(LALT(KC_RIGHT)), _______, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_UP), LCTL(KC_RIGHT), _______,
+      /***/    /***/    _______,             _______,              _______, _______,       _______,       _______
+      ),
 };
