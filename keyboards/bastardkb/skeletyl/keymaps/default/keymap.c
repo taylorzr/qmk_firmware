@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2021 Quentin LEBASTARD <qlebastard@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,34 +17,56 @@
 
 #include QMK_KEYBOARD_H
 
-// TODO Macros for parens and what not
-
-const uint16_t PROGMEM ent_combo[] = {KC_H, KC_COMM, COMBO_END};
-const uint16_t PROGMEM copy_combo[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM paste_combo[] = {KC_C, KC_D, COMBO_END};
-const uint16_t PROGMEM cut_combo[] = {KC_X, KC_D, COMBO_END};
-const uint16_t PROGMEM spaste_combo[] = {KC_X, KC_C, KC_D, COMBO_END};
-const uint16_t PROGMEM tab_combo[] = {KC_F, KC_P, COMBO_END};
-const uint16_t PROGMEM untab_combo[] = {KC_W, KC_F, COMBO_END};
-const uint16_t PROGMEM play_combo[] = {KC_F, KC_B, COMBO_END};
-const uint16_t PROGMEM next_combo[] = {KC_J, KC_U, COMBO_END};
-const uint16_t PROGMEM save_combo[] = {KC_L, KC_U, COMBO_END};
-const uint16_t PROGMEM ss_copy_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM ss_file_combo[] = {KC_C, KC_T, COMBO_END};
+// row 1
+const uint16_t PROGMEM fp_combo[] = {KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM wf_combo[] = {KC_W, KC_F, COMBO_END};
+const uint16_t PROGMEM wp_combo[] = {KC_W, KC_P, COMBO_END};
+const uint16_t PROGMEM wfp_combo[] = {KC_W, KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM fb_combo[] = {KC_F, KC_B, COMBO_END};
+const uint16_t PROGMEM ju_combo[] = {KC_J, KC_U, COMBO_END};
+const uint16_t PROGMEM lu_combo[] = {KC_L, KC_U, COMBO_END};
+const uint16_t PROGMEM uy_combo[] = {KC_U, KC_Y, COMBO_END};
+// row 2
+const uint16_t PROGMEM st_combo[] = {KC_S, KC_T, COMBO_END};
+const uint16_t PROGMEM rs_combo[] = {ALT_T(KC_R), KC_S, COMBO_END};
+const uint16_t PROGMEM ne_combo[] = {KC_N, KC_E, COMBO_END};
+const uint16_t PROGMEM ei_combo[] = {KC_E, KC_I, COMBO_END};
+//row 3
+const uint16_t PROGMEM xc_combo[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM cd_combo[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM xd_combo[] = {KC_X, KC_D, COMBO_END};
+const uint16_t PROGMEM xcd_combo[] = {KC_X, KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM hcomma_combo[] = {KC_H, KC_COMM, COMBO_END};
+const uint16_t PROGMEM commadot_combo[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM hdot_combo[] = {KC_H, KC_DOT, COMBO_END};
+const uint16_t PROGMEM hcommadot_combo[] = {KC_H, KC_COMM, KC_DOT, COMBO_END};
+// thumb
+const uint16_t PROGMEM spacedash_combo[] = {LT(1,KC_SPC), LT(2,KC_MINS), COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(tab_combo, KC_TAB),
-    COMBO(untab_combo, LSFT(KC_TAB)),
-    COMBO(copy_combo, LGUI(KC_C)),
-    COMBO(paste_combo, LGUI(KC_V)),
-    COMBO(cut_combo, LGUI(KC_X)),
-    COMBO(spaste_combo, LSFT(LGUI(KC_V))),
-    COMBO(ss_copy_combo, LCTL(LSFT(LGUI(KC_4)))),
-    COMBO(ss_file_combo, LSFT(LGUI(KC_4))),
-    COMBO(play_combo, KC_MPLY),
-    COMBO(next_combo, KC_MNXT),
-    COMBO(save_combo, LCTL(KC_S)),
-    COMBO(ent_combo, KC_ENT),
+    // row 1
+    COMBO(fp_combo, KC_TAB),
+    COMBO(wf_combo, LSFT(KC_TAB)),
+    COMBO(wp_combo, LSFT(LCTL(LGUI(KC_4)))),
+    COMBO(wfp_combo, KC_DEL),
+    COMBO(fb_combo, KC_MPLY),
+    COMBO(ju_combo, KC_MNXT),
+    COMBO(lu_combo, LCTL(KC_S)),
+    COMBO(uy_combo, KC_QUOT),
+    // row 2
+    COMBO(rs_combo, LSFT(LCTL(KC_LEFT))),
+    COMBO(st_combo, LSFT(LCTL(KC_RIGHT))),
+    COMBO(ne_combo, KC_ENT),
+    COMBO(ei_combo, KC_COLN),
+    // row 3
+    COMBO(xc_combo, KC_LBRC),
+    COMBO(cd_combo, KC_LPRN),
+    COMBO(xcd_combo, KC_LCBR),
+    COMBO(hcomma_combo, KC_RPRN),
+    COMBO(commadot_combo, KC_RBRC),
+    COMBO(hcommadot_combo, KC_RCBR),
+    // thumb
+    COMBO(spacedash_combo, KC_UNDERSCORE),
 };
 
 enum custom_keycodes {
@@ -55,46 +77,32 @@ enum custom_keycodes {
     MY_SQT,
 };
 
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MY_PAR:
             if (record->event.pressed) {
-                // when keycode QMKBEST is pressed
                 SEND_STRING("()" SS_TAP(X_LEFT));
-            } else {
-                // when keycode QMKBEST is released
             }
             break;
         case MY_BRC:
             if (record->event.pressed) {
-                // when keycode QMKBEST is pressed
                 SEND_STRING("{}" SS_TAP(X_LEFT));
-            } else {
-                // when keycode QMKBEST is released
             }
             break;
         case MY_BKT:
             if (record->event.pressed) {
-                // when keycode QMKBEST is pressed
                 SEND_STRING("[]" SS_TAP(X_LEFT));
-            } else {
-                // when keycode QMKBEST is released
             }
             break;
         case MY_DQT:
             if (record->event.pressed) {
-                // when keycode QMKBEST is pressed
                 SEND_STRING("\"\"" SS_TAP(X_LEFT));
-            } else {
-                // when keycode QMKBEST is released
             }
             break;
         case MY_SQT:
             if (record->event.pressed) {
-                // when keycode QMKBEST is pressed
                 SEND_STRING("''" SS_TAP(X_LEFT));
-            } else {
-                // when keycode QMKBEST is released
             }
             break;
     }
@@ -109,23 +117,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // TODO: Better use of right side 3rd thumb key?
   [0] = LAYOUT_split_3x5_3(
-      KC_Q, KC_W, KC_F,          KC_P,           KC_B,          KC_J,           KC_L,         KC_U,    KC_Y,   KC_QUOTE,
-      KC_A, KC_R, KC_S,          KC_T,           KC_G,          KC_M,           KC_N,         KC_E,    KC_I,   KC_O,
-      KC_Z, KC_X, KC_C,          KC_D,           KC_V,          KC_K,           KC_H,         KC_COMM, KC_DOT, KC_SLSH,
-      /***/ /***/ CTL_T(KC_ESC), SFT_T(KC_BSPC), GUI_T(KC_DEL), ALT_T(KC_SCLN), LT(1,KC_SPC), LT(2,KC_MINS)
+      KC_Q, KC_W,        KC_F,          KC_P,          KC_B,           /***/ KC_J,         KC_L,          KC_U,    KC_Y,   KC_QUOTE,
+      KC_A, ALT_T(KC_R), KC_S,          KC_T,          KC_G,           /***/ KC_M,         KC_N,          KC_E,    KC_I,   KC_O,
+      KC_Z, KC_X,        KC_C,          KC_D,          KC_V,           /***/ KC_K,         KC_H,          KC_COMM, KC_DOT, KC_SLSH,
+      /***/ /***/        GUI_T(KC_DEL), CTL_T(KC_ESC), SFT_T(KC_BSPC), /***/ LT(1,KC_SPC), LT(2,KC_MINS), ALT_T(KC_SCLN)
       ),
 
   [1] = LAYOUT_split_3x5_3(
-      KC_1,     KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,   KC_0,
-      KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL, KC_COLN,
-      KC_TILDE, KC_SCLN, MY_SQT,  MY_DQT,  KC_PIPE, KC_PLUS, MY_PAR,  MY_BRC,  MY_BKT, KC_BSLS,
-      /***/     /***/    KC_GRV,  _______, _______, _______, _______, _______
+      KC_EXLM,  KC_AT,  KC_HASH, KC_DLR,  KC_PERC, /***/ KC_CIRC, KC_AMPR, KC_ASTR, KC_PLUS,  KC_MINS,
+      KC_TILDE, KC_GRV, MY_SQT,  MY_DQT,  KC_PIPE, /***/ KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_BSLS,
+      _______,  MY_BKT, MY_BRC,  MY_PAR,  KC_SCLN, /***/ KC_COLN, KC_EQL,  _______, _______,  _______,
+      /***/     /***/   _______, _______, _______, /***/ _______, _______, _______
       ),
-  
+
   [2] = LAYOUT_split_3x5_3(
-      _______, _______, _______,             _______,              _______, _______,       KC_VOLD,       KC_VOLU,     _______,        _______,
-      _______, _______, LCTL(LSFT(KC_LEFT)), LCTL(LSFT(KC_RIGHT)), _______, KC_LEFT,       KC_DOWN,       KC_UP,       KC_RIGHT,       _______,
-      _______, _______, LCTL(LALT(KC_LEFT)), LCTL(LALT(KC_RIGHT)), _______, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_UP), LCTL(KC_RIGHT), _______,
-      /***/    /***/    _______,             _______,              _______, _______,       _______,       _______
+      KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, /***/ KC_CIRC, KC_AMPR, KC_ASTR, KC_PLUS,  KC_MINS,
+      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    /***/ KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
+      _______, _______, _______, _______, _______, /***/ _______, _______, _______, _______, _______,
+      /***/    /***/    _______, _______, _______, /***/ _______, _______, _______
       ),
 };

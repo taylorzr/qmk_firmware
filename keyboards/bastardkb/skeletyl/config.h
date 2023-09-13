@@ -103,7 +103,8 @@
 #endif
 
 
-#define COMBO_COUNT 12
+#define COMBO_COUNT 19
+#define COMBO_TERM 25
 
 // https://docs.qmk.fm/#/tap_hold?id=permissive-hold
 #define PERMISSIVE_HOLD
